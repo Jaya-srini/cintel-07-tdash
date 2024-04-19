@@ -9,16 +9,16 @@ import palmerpenguins  # Importing dataset palmerpenguins
 df = palmerpenguins.load_penguins()
 
 # Setting page options for the dashboard
-ui.page_opts(title="Penguins dashboard", fillable=True)
+ui.page_opts(title="Penguins Dashboard", fillable=True)
 
 # Creating sidebar with filter controls
-with ui.sidebar(title="Filter controls"):
+with ui.sidebar(title="Filter Controls"):
     # Creating input slider for mass filter
-    ui.input_slider("mass", "Mass", 2000, 6000, 6000)
+    ui.input_slider("mass", "Select Mass (g)", 2000, 6000, 6000)
     # Creating input checkbox group for species filter
     ui.input_checkbox_group(
         "species",
-        "Species",
+        "Select Species",
         ["Adelie", "Gentoo", "Chinstrap"],
         selected=["Adelie", "Gentoo", "Chinstrap"],
     )
@@ -27,17 +27,17 @@ with ui.sidebar(title="Filter controls"):
     # Links to GitHub repositories and PyShiny documentation
     ui.a(
         "GitHub Source",
-        href="https://github.com/Jaya-srini/cintel-07-tdash",
+        href="https://github.com/denisecase/cintel-07-tdash",
         target="_blank",
     )
     ui.a(
         "GitHub App",
-        href="https://jaya-srini.github.io/cintel-07-tdash/",
+        href="https://denisecase.github.io/cintel-07-tdash/",
         target="_blank",
     )
     ui.a(
         "GitHub Issues",
-        href="https://github.com/Jaya-srini/cintel-07-tdash/issues",
+        href="https://github.com/denisecase/cintel-07-tdash/issues",
         target="_blank",
     )
     ui.a("PyShiny", href="https://shiny.posit.co/py/", target="_blank")
@@ -55,21 +55,21 @@ with ui.sidebar(title="Filter controls"):
 # Creating layout with value boxes to display summary statistics
 with ui.layout_column_wrap(fill=False):
     with ui.value_box(showcase=icon_svg("earlybirds")):
-        "Number of penguins"
+        "Total Number of Penguins"
 
         @render.text
         def count():
             return filtered_df().shape[0]
 
     with ui.value_box(showcase=icon_svg("ruler-horizontal")):
-        "Average bill length"
+        "Average Bill Length"
 
         @render.text
         def bill_length():
             return f"{filtered_df()['bill_length_mm'].mean():.1f} mm"
 
     with ui.value_box(showcase=icon_svg("ruler-vertical")):
-        "Average bill depth"
+        "Average Bill Depth"
 
         @render.text
         def bill_depth():
@@ -78,7 +78,7 @@ with ui.layout_column_wrap(fill=False):
 # Creating layout with cards for data visualization
 with ui.layout_columns():
     with ui.card(full_screen=True):
-        ui.card_header("Bill length and depth")
+        ui.card_header("Bill Length and Depth")
 
         # Rendering scatter plot for bill length and depth
         @render.plot
